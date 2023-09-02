@@ -92,6 +92,26 @@
               </ul>
             </li>
             <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>
+                  الطلاب
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="main.php?dir=students&page=add" class="nav-link">
+                    <p> اضافة طالب </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="main.php?dir=students&page=report" class="nav-link">
+                    <p> مشاهدة الكل </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
               <a href="logout" class="nav-link" style="color: #e74c3c;">
                 <p>
                   تسجيل خروج
