@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <button type="button" class="btn btn-primary waves-effect btn-sm"> حضور المحدد </button>
+                        <!--  <button type="button" class="btn btn-primary waves-effect btn-sm"> حضور المحدد </button> -->
                         <form action="" method="post">
                             <button name="absent_all" type="submit" class="btn btn-danger waves-effect btn-sm"> غياب باقي الطلاب </button>
                         </form>
