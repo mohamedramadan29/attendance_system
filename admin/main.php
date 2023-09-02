@@ -55,15 +55,15 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
         include "university_branches/report.php";
     }
 
-    // START Coupons
-    if ($dir == 'coupons' && $page == 'add') {
-        include "coupons/add.php";
-    } elseif ($dir == 'coupons' && $page == 'edit') {
-        include "coupons/edit.php";
-    } elseif ($dir == 'coupons' && $page == 'delete') {
-        include 'coupons/delete.php';
-    } elseif ($dir == 'coupons' && $page == 'report') {
-        include "coupons/report.php";
+    // START SuperVisor
+    if ($dir == 'supervisor' && $page == 'add') {
+        include "supervisor/add.php";
+    } elseif ($dir == 'supervisor' && $page == 'edit') {
+        include "supervisor/edit.php";
+    } elseif ($dir == 'supervisor' && $page == 'delete') {
+        include 'supervisor/delete.php';
+    } elseif ($dir == 'supervisor' && $page == 'report') {
+        include "supervisor/report.php";
     }
 
     // START Gifts 
