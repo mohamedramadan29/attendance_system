@@ -59,38 +59,19 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <p>
-                  الأقسام
+                  الجهات الفرعية
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="main.php?dir=categories&page=report" class="nav-link">
-                    <p> جميع الأقسام </p>
+                  <a href="main.php?dir=university_branches&page=report" class="nav-link">
+                    <p> مشاهدة الكل </p>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>
-                  المنتجات
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="main.php?dir=products&page=report" class="nav-link">
-                    <p> جميع المنتجات </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="main.php?dir=products&page=add" class="nav-link">
-                    <p> اضافة منتج </p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+
             <li class="nav-item">
               <a href="logout" class="nav-link" style="color: #e74c3c;">
                 <p>

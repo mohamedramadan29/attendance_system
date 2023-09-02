@@ -43,6 +43,17 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
     } elseif ($dir == 'main_university' && $page == 'report') {
         include "main_university/report.php";
     }
+    // START University Branches 
+
+    if ($dir == 'university_branches' && $page == 'add') {
+        include "university_branches/add.php";
+    } elseif ($dir == 'university_branches' && $page == 'edit') {
+        include "university_branches/edit.php";
+    } elseif ($dir == 'university_branches' && $page == 'delete') {
+        include 'university_branches/delete.php';
+    } elseif ($dir == 'university_branches' && $page == 'report') {
+        include "university_branches/report.php";
+    }
 
     // START Coupons
     if ($dir == 'coupons' && $page == 'add') {
