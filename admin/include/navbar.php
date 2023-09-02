@@ -50,13 +50,8 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="main.php?dir=banners&page=report" class="nav-link">
+                  <a href="main.php?dir=main_university&page=report" class="nav-link">
                     <p> مشاهدة الكل </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="main.php?dir=about_us&page=report" class="nav-link">
-                    <p> اضافة جهه جديدة </p>
                   </a>
                 </li>
               </ul>
