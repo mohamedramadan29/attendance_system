@@ -53,6 +53,8 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
         include 'university_branches/delete.php';
     } elseif ($dir == 'university_branches' && $page == 'report') {
         include "university_branches/report.php";
+    } elseif ($dir == 'university_branches' && $page == 'students') {
+        include "university_branches/students.php";
     }
 
     // START SuperVisor

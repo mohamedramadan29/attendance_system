@@ -21,3 +21,4 @@ function createSlug($name)
     $slug = trim($slug, '-');
     return $slug;
 }
+date_default_timezone_set('Asia/Riyadh');

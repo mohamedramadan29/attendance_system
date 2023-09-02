@@ -76,6 +76,7 @@
                                         <th>الأسم </th>
                                         <th> البريد الألكتروني </th>
                                         <th> الموقع </th>
+                                        <th> الطلاب </th>
                                         <th> </th>
                                     </tr>
                                 </thead>
@@ -99,6 +100,7 @@
                                             <td> <?php echo  $cat['name']; ?> </td>
                                             <td> <?php echo  $cat['email']; ?> </td>
                                             <td> <?php echo  $cat['location']; ?> </td>
+                                            <td> <a class="btn btn-warning btn-sm" href="main.php?dir=university_branches&page=students&branch=<?php echo $cat['id']; ?>"> طلاب الفرع <i class="fa fa-eye"></i> </a> </td>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#edit-Modal_<?php echo $cat['id']; ?>"> <i class='fa fa-pen'></i> </button>
                                                 <a href="main.php?dir=university_branches&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
