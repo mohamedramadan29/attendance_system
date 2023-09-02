@@ -28,9 +28,8 @@
                     <div class="card-header d-flex justify-content-between">
                         <button type="button" class="btn btn-primary waves-effect btn-sm"> حضور المحدد </button>
                         <form action="" method="post">
-                            <button type="submit" class="btn btn-danger waves-effect btn-sm"> غياب باقي الطلاب </button>
+                            <button name="absent_all" type="submit" class="btn btn-danger waves-effect btn-sm"> غياب باقي الطلاب </button>
                         </form>
-
                     </div>
                     <?php
                     if (isset($_SESSION['success_message'])) {
@@ -120,9 +119,19 @@
                                                 $stmt->execute(array($student_id, $date));
                                                 $student_data = $stmt->fetch();
                                                 $count_row = $stmt->rowCount();
+                                                // check user in absent table
+                                                $stmt = $connect->prepare("SELECT * FROM absent_student WHERE student_id=? AND absent_date=?");
+                                                $stmt->execute(array($student_id, $date));
+                                                $student_absent_data = $stmt->fetch();
+                                                $count_absent = $stmt->rowCount();
                                                 if ($count_row > 0) {
                                                 ?>
                                                     <span class="badge badge-success"> تم الحضور </span>
+                                                <?php
+
+                                                } elseif ($count_absent > 0) {
+                                                ?>
+                                                    <span class="badge badge-danger"> غياب </span>
                                                 <?php
                                                 } else {
                                                 ?>
@@ -169,8 +178,35 @@
     </div>
     <!-- /.container-fluid -->
 </section>
-
 <!-- Absent All Another Students -->
 <?php
-
+if (isset($_POST['absent_all'])) {
+    // get all student in the branch 
+    $stmt = $connect->prepare("SELECT * FROM students WHERE university_branch =?");
+    $stmt->execute(array($brach_id));
+    $allstudents = $stmt->fetchAll();
+    foreach ($allstudents as $student) {
+        $student_id = $student['id'];
+        // check if student is attendace table or not
+        $stmt = $connect->prepare("SELECT * FROM attendance WHERE student_id = ?");
+        $stmt->execute(array($student_id));
+        $student_attend_data = $stmt->fetch();
+        $count = $stmt->rowCount();
+        if ($count > 0) {
+        } else {
+            // insert this student in absent table
+            $stmt = $connect->prepare("INSERT INTO absent_student (student_id ,absent_date,branch_id)
+            VALUES (:zstudent_id,:zattend_date,:zbranch_id)");
+            $stmt->execute(array(
+                "zstudent_id" => $student_id,
+                "zattend_date" => $date,
+                "zbranch_id" => $brach_id,
+            ));
+        }
+    }
+    if ($stmt) {
+        header("location:main.php?dir=university_branches&page=students&branch=" . $brach_id);
+        exit();
+    }
+}
 ?>
