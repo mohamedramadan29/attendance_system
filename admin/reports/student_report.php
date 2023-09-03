@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> اختر الطالب </label>
                                     <select style="min-width: 280px;" required name="student_id" class="form-control select2">
-                                        <option value=""> -- حدد الطال -- </option>
+                                        <option value=""> -- حدد الطالب -- </option>
                                         <?php
                                         $stmt = $connect->prepare("SELECT * FROM students");
                                         $stmt->execute();
