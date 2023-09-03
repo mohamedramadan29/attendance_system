@@ -94,6 +94,26 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <p>
+                  مشرف عام
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="main.php?dir=public_supervisor&page=add" class="nav-link">
+                    <p> اضافة مشرف </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="main.php?dir=public_supervisor&page=report" class="nav-link">
+                    <p> مشاهدة الكل </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>
                   الطلاب
                   <i class="right fas fa-angle-left"></i>
                 </p>

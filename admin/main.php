@@ -64,6 +64,16 @@ if (isset($_SESSION['supervisor_username'])) {
     } elseif ($dir == 'supervisor' && $page == 'report') {
         include "supervisor/report.php";
     }
+    // START Public SuperVisor
+    if ($dir == 'public_supervisor' && $page == 'add') {
+        include "public_supervisor/add.php";
+    } elseif ($dir == 'public_supervisor' && $page == 'edit') {
+        include "public_supervisor/edit.php";
+    } elseif ($dir == 'public_supervisor' && $page == 'delete') {
+        include 'public_supervisor/delete.php';
+    } elseif ($dir == 'public_supervisor' && $page == 'report') {
+        include "public_supervisor/report.php";
+    }
     // START Students
     if ($dir == 'students' && $page == 'add') {
         include "students/add.php";
@@ -81,7 +91,7 @@ if (isset($_SESSION['supervisor_username'])) {
         include "reports/main_university_report.php";
     } elseif ($dir == 'reports' && $page == 'student_report') {
         include 'reports/student_report.php';
-    } 
+    }
     ?>
 
 </div>

@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark"> المشرفين </h1>
+                <h1 class="m-0 text-dark"> المشرف العام  </h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -23,7 +23,7 @@
 <?php
 if (isset($_GET['super_id'])) {
     $super_id = $_GET['super_id'];
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE id = ?");
+    $stmt = $connect->prepare("SELECT * FROM public_supervisor WHERE id = ?");
     $stmt->execute(array($super_id));
     $super_data = $stmt->fetch();
 }
@@ -76,23 +76,7 @@ if (isset($_GET['super_id'])) {
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> الأسم </label>
                                     <input required id="Company-2" name="name" type="text" class="form-control required" value="<?php echo $super_data['name']; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="Company-2" class="block"> جهه الأشراف </label>
-                                    <select required name="university_branch" id="" class="form-control select2">
-                                        <option value=""> -- حدد جهه الأشراف -- </option>
-                                        <?php
-                                        $stmt = $connect->prepare("SELECT * FROM university_branches");
-                                        $stmt->execute();
-                                        $all_univer = $stmt->fetchAll();
-                                        foreach ($all_univer as $univer) {
-                                        ?>
-                                            <option <?php if ($super_data['university_branch'] == $univer["id"]) echo 'selected' ?> value="<?php echo $univer['id']; ?>"> <?php echo $univer['name']; ?> </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                                </div> 
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> النوع </label>
                                     <select required name="kind" id="" class="form-control select2">
@@ -149,8 +133,7 @@ if (isset($_GET['super_id'])) {
 </section>
 
 <?php
-if (isset($_POST['edit_cat'])) {
-    $university_branch = $_POST['university_branch'];
+if (isset($_POST['edit_cat'])) { 
     $name = $_POST['name'];
     $kind = $_POST['kind'];
     $id_number = $_POST['id_number'];
@@ -162,32 +145,32 @@ if (isset($_POST['edit_cat'])) {
 
     $formerror = [];
     if (
-        empty($id_number) || empty($university_branch) || empty($name) || empty($kind) || empty($employe_name) || empty($email)
+        empty($id_number)   || empty($name) || empty($kind) || empty($employe_name) || empty($email)
         || empty($phone) || empty($user_name) || empty($password)
     ) {
         $formerror[] = ' من فضلك ادخل جميع المعلومات ';
     }
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE id_number = ? AND id !=?");
+    $stmt = $connect->prepare("SELECT * FROM public_supervisor WHERE id_number = ? AND id !=?");
     $stmt->execute(array($id_number, $super_id));
     $count = $stmt->rowCount();
     if ($count > 0) {
         $formerror[] = ' رقم الهوية الوطنية موجود من قبل   ';
     }
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE user_name = ? AND id !=?");
+    $stmt = $connect->prepare("SELECT * FROM public_supervisor WHERE user_name = ? AND id !=?");
     $stmt->execute(array($user_name,$super_id));
     $count = $stmt->rowCount();
     if ($count > 0) {
         $formerror[] = ' اسم المستخدم موجود من قبل من فضلك ادخل اسم مستخدم اخر  ';
     }
     if (empty($formerror)) {
-        $stmt = $connect->prepare("UPDATE supervisor SET university_branch=?,name=?,kind=?,id_number=?,employe_name=?,email=?,phone=?,user_name=?,password=? WHERE id = ?");
+        $stmt = $connect->prepare("UPDATE public_supervisor SET user_name=?,name=?,kind=?,id_number=?,employe_name=?,email=?,phone=?,password=? WHERE id = ?");
         $stmt->execute(array(
-            $university_branch, $name,  $kind, $id_number, $employe_name,  $email,
-            $phone,  $user_name, $password, $super_id
+            $user_name, $name,  $kind, $id_number, $employe_name,  $email,
+            $phone, $password, $super_id
         ));
         if ($stmt) {
             $_SESSION['success_message'] = " تمت التعديل  بنجاح  ";
-            header('Location:main?dir=supervisor&page=report');
+            header('Location:main?dir=public_supervisor&page=report');
         }
     } else {
         foreach ($formerror as $error) {

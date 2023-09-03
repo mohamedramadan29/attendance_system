@@ -3,13 +3,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark"> المشرفين </h1>
+                <h1 class="m-0 text-dark"> مشرف عام </h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-left">
                     <li class="breadcrumb-item"><a href="main.php?dir=dashboard&page=dashboard">الرئيسية</a></li>
-                    <li class="breadcrumb-item active"> تعديل مشرف </li>
+                    <li class="breadcrumb-item active"> اضافة مشرف عام </li>
                 </ol>
             </div>
             <!-- /.col -->
@@ -19,22 +19,13 @@
     <!-- /.container-fluid -->
 </section>
 <!-- /.content-header -->
-<!-- GET THE SUPERVISOR DATA -->
-<?php
-if (isset($_GET['super_id'])) {
-    $super_id = $_GET['super_id'];
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE id = ?");
-    $stmt->execute(array($super_id));
-    $super_data = $stmt->fetch();
-}
 
-?>
-<!-- GET THE SUPERVISOR DATA -->
 <!-- DOM/Jquery table start -->
 <section class="content">
     <div class="container-fluid">
         <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
+
                 <div class="col-lg-6">
                     <div class="card">
                         <?php
@@ -75,39 +66,23 @@ if (isset($_GET['super_id'])) {
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> الأسم </label>
-                                    <input required id="Company-2" name="name" type="text" class="form-control required" value="<?php echo $super_data['name']; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="Company-2" class="block"> جهه الأشراف </label>
-                                    <select required name="university_branch" id="" class="form-control select2">
-                                        <option value=""> -- حدد جهه الأشراف -- </option>
-                                        <?php
-                                        $stmt = $connect->prepare("SELECT * FROM university_branches");
-                                        $stmt->execute();
-                                        $all_univer = $stmt->fetchAll();
-                                        foreach ($all_univer as $univer) {
-                                        ?>
-                                            <option <?php if ($super_data['university_branch'] == $univer["id"]) echo 'selected' ?> value="<?php echo $univer['id']; ?>"> <?php echo $univer['name']; ?> </option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
+                                    <input required id="Company-2" name="name" type="text" class="form-control required" value="<?php if (isset($_REQUEST['name'])) echo $_REQUEST['name']; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> النوع </label>
                                     <select required name="kind" id="" class="form-control select2">
                                         <option value=""> -- حدد النوع -- </option>
-                                        <option <?php if ($super_data['kind'] == 'ذكر')   echo 'selected' ?> value="ذكر"> ذكر </option>
-                                        <option <?php if ($super_data['kind'] == 'انثي') echo 'selected' ?> value="انثي"> انثي </option>
+                                        <option <?php if (isset($_REQUEST['kind']) == 'ذكر') echo 'selected' ?> value="ذكر"> ذكر </option>
+                                        <option <?php if (isset($_REQUEST['kind']) == 'انثي') echo 'selected' ?> value="انثي"> انثي </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> رقم الهوية </label>
-                                    <input required id="Company-2" name="id_number" type="text" class="form-control required" value="<?php echo $super_data['id_number']; ?>">
+                                    <input required id="Company-2" name="id_number" type="text" class="form-control required" value="<?php if (isset($_REQUEST['id_number'])) echo $_REQUEST['id_number']; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="Company-2" class="block"> المسمي الوظيفي </label>
-                                    <input required id="Company-2" name="employe_name" type="text" class="form-control required" value="<?php echo $super_data['employe_name']; ?>">
+                                    <input required id="Company-2" name="employe_name" type="text" class="form-control required" value="<?php if (isset($_REQUEST['employe_name'])) echo $_REQUEST['employe_name']; ?>">
                                 </div>
                             </div>
                         </div>
@@ -118,24 +93,23 @@ if (isset($_GET['super_id'])) {
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="Company-2" class="block"> البريد الألكتروني </label>
-                                <input id="Company-2" name="email" type="email" class="form-control required" value="<?php echo $super_data['email']; ?>">
+                                <input id="Company-2" name="email" type="email" class="form-control required" value="<?php if (isset($_REQUEST['email'])) echo $_REQUEST['email']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="Company-2" class="block"> رقم الهاتف </label>
-                                <input id="Company-2" name="phone" type="text" class="form-control required" value="<?php echo $super_data['phone']; ?>">
+                                <input id="Company-2" name="phone" type="text" class="form-control required" value="<?php if (isset($_REQUEST['phone'])) echo $_REQUEST['phone']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="Company-2" class="block"> اسم المستخدم </label>
-                                <input id="Company-2" name="user_name" type="text" class="form-control required" value="<?php echo $super_data['user_name']; ?>">
+                                <input id="Company-2" name="user_name" type="text" class="form-control required" value="<?php if (isset($_REQUEST['user_name'])) echo $_REQUEST['user_name']; ?>">
                             </div>
                             <div class="form-group">
                                 <label for="Company-2" class="block"> كلمة المرور </label>
-                                <input id="Company-2" name="password" type="text" class="form-control required" value="<?php echo $super_data['password']; ?>">
+                                <input id="Company-2" name="password" type="text" class="form-control required" value="<?php if (isset($_REQUEST['password'])) echo $_REQUEST['password']; ?>">
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" name="edit_cat" class="btn btn-primary waves-effect waves-light "> تعديل المشرف </button>
-
-                                <a class="btn btn-default waves-effect " href="main.php?dir=supervisor&page=report"> رجوع </a>
+                                <button type="submit" name="add_cat" class="btn btn-primary waves-effect waves-light "> حفظ </button>
+                                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal"> رجوع </button>
                             </div>
                         </div>
                     </div>
@@ -149,8 +123,7 @@ if (isset($_GET['super_id'])) {
 </section>
 
 <?php
-if (isset($_POST['edit_cat'])) {
-    $university_branch = $_POST['university_branch'];
+if (isset($_POST['add_cat'])) {
     $name = $_POST['name'];
     $kind = $_POST['kind'];
     $id_number = $_POST['id_number'];
@@ -162,32 +135,39 @@ if (isset($_POST['edit_cat'])) {
 
     $formerror = [];
     if (
-        empty($id_number) || empty($university_branch) || empty($name) || empty($kind) || empty($employe_name) || empty($email)
+        empty($id_number)  || empty($name) || empty($kind) || empty($employe_name) || empty($email)
         || empty($phone) || empty($user_name) || empty($password)
     ) {
         $formerror[] = ' من فضلك ادخل جميع المعلومات ';
     }
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE id_number = ? AND id !=?");
-    $stmt->execute(array($id_number, $super_id));
+    $stmt = $connect->prepare("SELECT * FROM public_supervisor WHERE id_number = ?");
+    $stmt->execute(array($id_number));
     $count = $stmt->rowCount();
     if ($count > 0) {
         $formerror[] = ' رقم الهوية الوطنية موجود من قبل   ';
     }
-    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE user_name = ? AND id !=?");
-    $stmt->execute(array($user_name,$super_id));
+    $stmt = $connect->prepare("SELECT * FROM public_supervisor WHERE user_name = ?");
+    $stmt->execute(array($user_name));
     $count = $stmt->rowCount();
     if ($count > 0) {
         $formerror[] = ' اسم المستخدم موجود من قبل من فضلك ادخل اسم مستخدم اخر  ';
     }
     if (empty($formerror)) {
-        $stmt = $connect->prepare("UPDATE supervisor SET university_branch=?,name=?,kind=?,id_number=?,employe_name=?,email=?,phone=?,user_name=?,password=? WHERE id = ?");
+        $stmt = $connect->prepare("INSERT INTO public_supervisor (user_name,name,kind,id_number,employe_name,email,phone,password)
+        VALUES (:zuser_name,:zname,:zkind,:zid_number,:zemploye_name,:zemail,:zphone,:zpassword)");
         $stmt->execute(array(
-            $university_branch, $name,  $kind, $id_number, $employe_name,  $email,
-            $phone,  $user_name, $password, $super_id
+            "zuser_name" => $user_name,
+            "zname" => $name,
+            "zkind" => $kind,
+            "zid_number" => $id_number,
+            "zemploye_name" => $employe_name,
+            "zemail" => $email,
+            "zphone" =>  $phone,
+            "zpassword" => $password,
         ));
         if ($stmt) {
-            $_SESSION['success_message'] = " تمت التعديل  بنجاح  ";
-            header('Location:main?dir=supervisor&page=report');
+            $_SESSION['success_message'] = " تمت الأضافة بنجاح  ";
+            header('Location:main?dir=public_supervisor&page=report');
         }
     } else {
         foreach ($formerror as $error) {
