@@ -112,6 +112,31 @@
               </ul>
             </li>
             <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>
+                  التقارير
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="main.php?dir=reports&page=main_university_report" class="nav-link">
+                    <p> تقرير عام </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="main.php?dir=reports&page=branch_report" class="nav-link">
+                    <p> تقرير عن فرع </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="main.php?dir=reports&page=student_report" class="nav-link">
+                    <p> تقرير طالب </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
               <a href="logout" class="nav-link" style="color: #e74c3c;">
                 <p>
                   تسجيل خروج

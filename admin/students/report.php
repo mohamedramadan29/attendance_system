@@ -75,6 +75,8 @@
                                         <th> الفرقة التدريبية </th>
                                         <th> البريد الألكتروني </th>
                                         <th> رقم الهاتف </th>
+                                        <th> مرات الحضور </th>
+                                        <th> مرات الغياب </th>
                                         <th> </th>
                                     </tr>
                                 </thead>
@@ -106,6 +108,21 @@
                                             <td> <?php echo  $cat['employe_name']; ?> </td>
                                             <td> <?php echo  $cat['email']; ?> </td>
                                             <td> <?php echo  $cat['phone']; ?> </td>
+                                            <td>
+                                                <?php 
+                                                $stmt = $connect->prepare("SELECT * FROM attendance WHERE student_id = ?");
+                                                $stmt->execute(array($cat['id']));
+                                                $count_num = count($stmt->fetchAll());
+                                                ?>
+                                                 <span class="badge badge-success"> <?php echo $count_num; ?> </span> 
+                                                </td>
+                                            <td>
+                                            <?php 
+                                                $stmt = $connect->prepare("SELECT * FROM absent_student WHERE student_id = ?");
+                                                $stmt->execute(array($cat['id']));
+                                                $count_num_absent = count($stmt->fetchAll());
+                                                ?>
+                                            <span class="badge badge-danger"> <?php echo $count_num_absent; ?> </span> </td>
                                             <td>
 
                                                 <a href="main.php?dir=students&page=edit&super_id=<?php echo $cat['id']; ?>" class="btn btn-success btn-sm"> <i class='fa fa-edit'></i> </a>

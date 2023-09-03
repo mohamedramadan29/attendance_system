@@ -77,7 +77,14 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
     } elseif ($dir == 'students' && $page == 'report') {
         include "students/report.php";
     }
-
+    // START Reports 
+    if ($dir == 'reports' && $page == 'branch_report') {
+        include "reports/branch_report.php";
+    } elseif ($dir == 'reports' && $page == 'main_university_report') {
+        include "reports/main_university_report.php";
+    } elseif ($dir == 'reports' && $page == 'student_report') {
+        include 'reports/student_report.php';
+    }
     ?>
 
 </div>
