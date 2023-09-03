@@ -27,9 +27,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
                     <div class="card-header">
-                        <button type="button" class="btn btn-primary waves-effect btn-sm" data-toggle="modal" data-target="#add-Modal"> اضافة جهه فرعية <i class="fa fa-plus"></i> </button>
+                        <?php
+                        if (isset($_SESSION['admin_username'])) {
+                        ?>
+                            <button type="button" class="btn btn-primary waves-effect btn-sm" data-toggle="modal" data-target="#add-Modal"> اضافة جهه فرعية <i class="fa fa-plus"></i> </button>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <?php
                     if (isset($_SESSION['success_message'])) {
@@ -82,8 +87,17 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $stmt = $connect->prepare("SELECT * FROM university_branches ORDER BY id DESC");
-                                    $stmt->execute();
+                                    if (isset($_SESSION['supervisor_id'])) {
+                                        $stmt = $connect->prepare("SELECT * FROM supervisor WHERE id =? ");
+                                        $stmt->execute(array($_SESSION['supervisor_id']));
+                                        $supervisor_data = $stmt->fetch();
+                                        $university_branch_id = $supervisor_data['university_branch'];
+                                        $stmt = $connect->prepare("SELECT * FROM university_branches WHERE id = ? ORDER BY id DESC");
+                                        $stmt->execute(array($university_branch_id));
+                                    } else {
+                                        $stmt = $connect->prepare("SELECT * FROM university_branches   ORDER BY id DESC");
+                                        $stmt->execute();
+                                    }
                                     $allcat = $stmt->fetchAll();
                                     $i = 0;
                                     foreach ($allcat as $cat) {
@@ -102,8 +116,14 @@
                                             <td> <?php echo  $cat['location']; ?> </td>
                                             <td> <a class="btn btn-warning btn-sm" href="main.php?dir=university_branches&page=students&branch=<?php echo $cat['id']; ?>"> طلاب الفرع <i class="fa fa-eye"></i> </a> </td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#edit-Modal_<?php echo $cat['id']; ?>"> <i class='fa fa-pen'></i> </button>
-                                                <a href="main.php?dir=university_branches&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                if (isset($_SESSION['admin_username'])) {
+                                                ?>
+                                                    <button type="button" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#edit-Modal_<?php echo $cat['id']; ?>"> <i class='fa fa-pen'></i> </button>
+                                                    <a href="main.php?dir=university_branches&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
                                         <!-- EDIT NEW CATEGORY MODAL   -->

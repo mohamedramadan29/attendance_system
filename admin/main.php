@@ -7,11 +7,8 @@ include 'init.php';
 if (isset($_SESSION['admin_username'])) {
     include 'include/navbar.php';
 }
-if (isset($_SESSION['username'])) {
-    include 'include/emp_navbar.php';
-}
-if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) {
-    header("Location:index");
+if (isset($_SESSION['supervisor_username'])) {
+    include 'include/supervisor_navbar.php';
 }
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -28,8 +25,8 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
     // STRAT DASHBAORD
     if ($dir == 'dashboard' && $page == 'dashboard') {
         include 'dashboard.php';
-    } elseif ($dir == 'dashboard' && $page == 'emp_dashboard') {
-        include 'emp_dashboard.php';
+    } elseif ($dir == 'dashboard' && $page == 'supervisor_dashboard') {
+        include 'supervisor_dashboard.php';
     }
     // END DASHBAORD
     // START Main University 
@@ -84,7 +81,7 @@ if (!isset($_SESSION['admin_username']) || !isset($_SESSION['admin_username'])) 
         include "reports/main_university_report.php";
     } elseif ($dir == 'reports' && $page == 'student_report') {
         include 'reports/student_report.php';
-    }
+    } 
     ?>
 
 </div>

@@ -173,6 +173,12 @@ if (isset($_POST['edit_cat'])) {
     if ($count > 0) {
         $formerror[] = ' رقم الهوية الوطنية موجود من قبل   ';
     }
+    $stmt = $connect->prepare("SELECT * FROM supervisor WHERE user_name = ? AND id !=?");
+    $stmt->execute(array($user_name));
+    $count = $stmt->rowCount();
+    if ($count > 0) {
+        $formerror[] = ' اسم المستخدم موجود من قبل من فضلك ادخل اسم مستخدم اخر  ';
+    }
     if (empty($formerror)) {
         $stmt = $connect->prepare("UPDATE supervisor SET university_branch=?,name=?,kind=?,id_number=?,employe_name=?,email=?,phone=?,user_name=?,password=? WHERE id = ?");
         $stmt->execute(array(

@@ -4,7 +4,7 @@ ob_start();
 session_start();
 $Nonavbar = '';
 include 'connect.php';
-if (isset($_POST['login']) == 'POST') {
+if (isset($_POST['login']) == 'POST' && $_POST['permission'] == 'admin') {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $stmt = $connect->prepare(
@@ -17,6 +17,21 @@ if (isset($_POST['login']) == 'POST') {
     $_SESSION['admin_username'] = $data['username'];
     $_SESSION['admin_id'] = $data['id'];
     header('Location:main.php?dir=dashboard&page=dashboard');
+    exit();
+  }
+} elseif (isset($_POST['login']) == 'POST' && $_POST['permission'] == 'supervisor') {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $stmt = $connect->prepare(
+    'SELECT * FROM supervisor WHERE user_name=? AND password=?'
+  );
+  $stmt->execute([$username, $password]);
+  $data = $stmt->fetch();
+  $count = $stmt->rowCount();
+  if ($count > 0) {
+    $_SESSION['supervisor_username'] = $data['user_name'];
+    $_SESSION['supervisor_id'] = $data['id'];
+    header('Location:main.php?dir=dashboard&page=supervisor_dashboard');
     exit();
   }
 }
@@ -68,9 +83,9 @@ if (isset($_POST['login']) == 'POST') {
                   <label for="password"> اختر الصلاحية </label>
                   <select name="permission" id="" class="form-control select2">
                     <option value=""> -- اختر الصلاحية -- </option>
-                    <option value=""> الادمن </option>
-                    <option value=""> مشرف عام </option>
-                    <option value=""> مشرف </option>
+                    <option value="admin"> الادمن </option>
+                    <option value="public_super"> مشرف عام </option>
+                    <option value="supervisor"> مشرف </option>
                   </select>
                 </div>
                 <input style="background-color: #2ecc71; border-color:#2ecc71" name="login" type="submit" value=" تسجيل دخول " class="btn btn-block py-2 btn-primary">
