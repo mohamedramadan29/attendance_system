@@ -34,6 +34,21 @@ if (isset($_POST['login']) == 'POST' && $_POST['permission'] == 'admin') {
     header('Location:main.php?dir=dashboard&page=supervisor_dashboard');
     exit();
   }
+} elseif (isset($_POST['login']) == 'POST' && $_POST['permission'] == 'public_super') {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+  $stmt = $connect->prepare(
+    'SELECT * FROM public_supervisor WHERE user_name=? AND password=?'
+  );
+  $stmt->execute([$username, $password]);
+  $data = $stmt->fetch();
+  $count = $stmt->rowCount();
+  if ($count > 0) {
+    $_SESSION['public_super_username'] = $data['user_name'];
+    $_SESSION['public_super_id'] = $data['id'];
+    header('Location:main.php?dir=dashboard&page=public_super_dashboard');
+    exit();
+  }
 }
 ?>
 <!doctype html>

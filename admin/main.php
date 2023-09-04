@@ -10,6 +10,9 @@ if (isset($_SESSION['admin_username'])) {
 if (isset($_SESSION['supervisor_username'])) {
     include 'include/supervisor_navbar.php';
 }
+if (isset($_SESSION['public_super_username'])) {
+    include 'include/public_super_navbar.php';
+}
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -27,6 +30,8 @@ if (isset($_SESSION['supervisor_username'])) {
         include 'dashboard.php';
     } elseif ($dir == 'dashboard' && $page == 'supervisor_dashboard') {
         include 'supervisor_dashboard.php';
+    } elseif ($dir == 'dashboard' && $page == 'public_super_dashboard') {
+        include 'public_super_dashboard.php';
     }
     // END DASHBAORD
     // START Main University 

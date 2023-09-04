@@ -26,7 +26,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="main.php?dir=public_supervisor&page=add" type="button" class="btn btn-primary waves-effect btn-sm"> اضافة مشرف عام جديد <i class="fa fa-plus"></i> </a>
+                        <?php
+                        if (isset($_SESSION['admin_username'])) {
+                        ?>
+                            <a href="main.php?dir=public_supervisor&page=add" type="button" class="btn btn-primary waves-effect btn-sm"> اضافة مشرف عام جديد <i class="fa fa-plus"></i> </a>
+                        <?php
+                        }
+                        ?>
+
                     </div>
                     <?php
                     if (isset($_SESSION['success_message'])) {
@@ -95,12 +102,16 @@
                                             <td> <?php echo  $cat['email']; ?> </td>
                                             <td> <?php echo  $cat['phone']; ?> </td>
                                             <td>
-
-                                                <a href="main.php?dir=public_supervisor&page=edit&super_id=<?php echo $cat['id']; ?>" class="btn btn-success btn-sm"> <i class='fa fa-edit'></i> </a>
-                                                <a href="main.php?dir=public_supervisor&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                if (isset($_SESSION['admin_username'])) {
+                                                ?>
+                                                    <a href="main.php?dir=public_supervisor&page=edit&super_id=<?php echo $cat['id']; ?>" class="btn btn-success btn-sm"> <i class='fa fa-edit'></i> </a>
+                                                    <a href="main.php?dir=public_supervisor&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
-
                                     <?php
                                     }
                                     ?>

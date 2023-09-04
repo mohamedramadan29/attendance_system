@@ -26,7 +26,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="main.php?dir=students&page=add" type="button" class="btn btn-primary waves-effect btn-sm"> اضافة طالب جديد <i class="fa fa-plus"></i> </a>
+                        <?php
+                        if (isset($_SESSION['admin_username'])) {
+                        ?>
+                            <a href="main.php?dir=students&page=add" type="button" class="btn btn-primary waves-effect btn-sm"> اضافة طالب جديد <i class="fa fa-plus"></i> </a>
+                        <?php
+                        }
+                        ?>
+
                     </div>
                     <?php
                     if (isset($_SESSION['success_message'])) {
@@ -109,27 +116,32 @@
                                             <td> <?php echo  $cat['email']; ?> </td>
                                             <td> <?php echo  $cat['phone']; ?> </td>
                                             <td>
-                                                <?php 
+                                                <?php
                                                 $stmt = $connect->prepare("SELECT * FROM attendance WHERE student_id = ?");
                                                 $stmt->execute(array($cat['id']));
                                                 $count_num = count($stmt->fetchAll());
                                                 ?>
-                                                 <span class="badge badge-success"> <?php echo $count_num; ?> </span> 
-                                                </td>
+                                                <span class="badge badge-success"> <?php echo $count_num; ?> </span>
+                                            </td>
                                             <td>
-                                            <?php 
+                                                <?php
                                                 $stmt = $connect->prepare("SELECT * FROM absent_student WHERE student_id = ?");
                                                 $stmt->execute(array($cat['id']));
                                                 $count_num_absent = count($stmt->fetchAll());
                                                 ?>
-                                            <span class="badge badge-danger"> <?php echo $count_num_absent; ?> </span> </td>
+                                                <span class="badge badge-danger"> <?php echo $count_num_absent; ?> </span>
+                                            </td>
                                             <td>
-
-                                                <a href="main.php?dir=students&page=edit&super_id=<?php echo $cat['id']; ?>" class="btn btn-success btn-sm"> <i class='fa fa-edit'></i> </a>
-                                                <a href="main.php?dir=students&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                if (isset($_SESSION['admin_username'])) {
+                                                ?>
+                                                    <a href="main.php?dir=students&page=edit&super_id=<?php echo $cat['id']; ?>" class="btn btn-success btn-sm"> <i class='fa fa-edit'></i> </a>
+                                                    <a href="main.php?dir=students&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
-
                                     <?php
                                     }
                                     ?>

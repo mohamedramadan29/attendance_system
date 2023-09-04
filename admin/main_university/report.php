@@ -27,9 +27,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-
                     <div class="card-header">
-                        <button type="button" class="btn btn-primary waves-effect btn-sm" data-toggle="modal" data-target="#add-Modal"> اضافة جهه رئيسية <i class="fa fa-plus"></i> </button>
+                        <?php
+                        if (isset($_SESSION['admin_username'])) {
+                        ?>
+                            <button type="button" class="btn btn-primary waves-effect btn-sm" data-toggle="modal" data-target="#add-Modal"> اضافة جهه رئيسية <i class="fa fa-plus"></i> </button>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <?php
                     if (isset($_SESSION['success_message'])) {
@@ -93,8 +98,15 @@
                                             <td> <?php echo  $cat['email']; ?> </td>
                                             <td> <?php echo  $cat['location']; ?> </td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#edit-Modal_<?php echo $cat['id']; ?>"> <i class='fa fa-pen'></i> </button>
-                                                <a href="main.php?dir=main_university&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                if (isset($_SESSION['admin_username'])) {
+                                                ?>
+                                                    <button type="button" class="btn btn-success btn-sm waves-effect" data-toggle="modal" data-target="#edit-Modal_<?php echo $cat['id']; ?>"> <i class='fa fa-pen'></i> </button>
+                                                    <a href="main.php?dir=main_university&page=delete&cat_id=<?php echo $cat['id']; ?>" class="confirm btn btn-danger btn-sm"> <i class='fa fa-trash'></i> </a>
+                                                <?php
+                                                }
+                                                ?>
+
                                             </td>
                                         </tr>
                                         <!-- EDIT NEW CATEGORY MODAL   -->
@@ -108,7 +120,7 @@
                                                         <div class="modal-body">
                                                             <input type='hidden' name="uni_id" value="<?php echo $cat['id']; ?>">
                                                             <div class="form-group">
-                                                                <label for="Company-2" class="block"> الأسم  </label>
+                                                                <label for="Company-2" class="block"> الأسم </label>
                                                                 <input id="Company-2" name="name" type="text" class="form-control required" value="<?php echo $cat['name'] ?>">
                                                             </div>
                                                             <div class="form-group">
@@ -121,6 +133,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
+
                                                             <button type="submit" name="edit_cat" class="btn btn-primary waves-effect waves-light "> تعديل </button>
                                                             <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">رجوع</button>
                                                         </div>
