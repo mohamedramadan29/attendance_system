@@ -97,6 +97,16 @@ if (isset($_SESSION['public_super_username'])) {
     } elseif ($dir == 'reports' && $page == 'student_report') {
         include 'reports/student_report.php';
     }
+    // START Courses 
+    if ($dir == 'courses' && $page == 'add') {
+        include "courses/add.php";
+    } elseif ($dir == 'courses' && $page == 'edit') {
+        include "courses/edit.php";
+    } elseif ($dir == 'courses' && $page == 'delete') {
+        include 'courses/delete.php';
+    } elseif ($dir == 'courses' && $page == 'report') {
+        include "courses/report.php";
+    }
     ?>
 
 </div>
